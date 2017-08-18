@@ -1,13 +1,13 @@
 <?php
 namespace YoastSeoForTypo3\YoastSeo\Controller;
 
-use TYPO3\CMS\Backend\Template\Components\ButtonBar;
+//use TYPO3\CMS\Backend\Template\Components\ButtonBar;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Backend\View\BackendTemplateView;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Database\DatabaseConnection;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
-use TYPO3\CMS\Core\Imaging\Icon;
+//use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Localization\Locales;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Page\PageRenderer;
@@ -28,14 +28,14 @@ class ModuleController extends ActionController
      *
      * @var string
      */
-    protected $defaultViewObjectName = BackendTemplateView::class;
+//    protected $defaultViewObjectName = BackendTemplateView::class;
 
     /**
      * BackendTemplateContainer
      *
      * @var BackendTemplateView
      */
-    protected $view;
+//    protected $view;
 
     /**
      * @var PageRenderer
@@ -84,13 +84,13 @@ class ModuleController extends ActionController
         parent::initializeView($view);
 
         // Early return for actions without valid view like tcaCreateAction or tcaDeleteAction
-        if (!($this->view instanceof BackendTemplateView)) {
-            return;
-        }
+//        if (!($this->view instanceof BackendTemplateView)) {
+//            return;
+//        }
 
-        $this->createMenu();
+//        $this->createMenu();
         $this->makeLanguageMenu();
-        $this->registerDocheaderButtons();
+//        $this->registerDocheaderButtons();
     }
 
     protected function initializeAction()
@@ -168,9 +168,8 @@ class ModuleController extends ActionController
 
         $domain = BackendUtility::getViewDomain($currentPage['uid']);
         $previewDataUrl = vsprintf(
-            $domain . '/index.php?id=%d&type=%d&L=%d',
+            $domain . '/nc.html?type=%d&L=%d',
             array(
-                (int) $pageId,
                 self::FE_PREVIEW_TYPE,
                 $languageId
             )
@@ -196,7 +195,7 @@ class ModuleController extends ActionController
                 . ';'
             );
         }
-        $publicResourcesPath = ExtensionManagementUtility::extRelPath('yoast_seo') . 'Resources/Public/';
+        $publicResourcesPath = '../../../' . ExtensionManagementUtility::extRelPath('yoast_seo') . 'Resources/Public/';
 
         $this->pageRenderer->addJsInlineCode(
             'YoastSEO settings',
@@ -228,8 +227,18 @@ class ModuleController extends ActionController
         $this->pageRenderer->loadRequireJsModule('YoastSEO/app');
 
         $this->pageRenderer->addCssFile(
+            $publicResourcesPath . 'CSS/bootstrap.min.css'
+        );
+
+        $this->pageRenderer->addCssFile(
+            $publicResourcesPath . 'CSS/bootstrap-theme.min.css'
+        );
+
+        $this->pageRenderer->addCssFile(
             $publicResourcesPath . 'CSS/yoast-seo.min.css'
         );
+
+        $this->pageRenderer->addJsLibrary('bootstrap', $publicResourcesPath . 'JavaScript/bootstrap.min.js');
 
         $returnUrl = '';
         if ($this->request->hasArgument('returnUrl')) {

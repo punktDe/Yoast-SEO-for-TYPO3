@@ -1,6 +1,6 @@
 /*global define, top, tx_yoast_seo, TYPO3*/
 
-define(['jquery', './bundle', 'TYPO3/CMS/Backend/AjaxDataHandler', 'TYPO3/CMS/Backend/Notification', 'TYPO3/CMS/Backend/PageActions'], function ($, YoastSEO, AjaxDataHandler, Notification, PageActions) {
+define(['jquery', './bundle'], function ($, YoastSEO) {
    'use strict';
 
     var previewRequest = $.get(tx_yoast_seo.settings.preview);
@@ -172,7 +172,7 @@ define(['jquery', './bundle', 'TYPO3/CMS/Backend/AjaxDataHandler', 'TYPO3/CMS/Ba
             // depending on the target the actual method is invoked
             $('#PageLayoutController').on('click', function (e) {
                 var $trigger = $(e.target);
-                var currentPageTitle = PageActions.elements.$pageTitle.text();
+                var currentPageTitle = $('.t3js-title-inlineedit').text();
 
                 if ($trigger.hasClass('btn')
                     && $trigger.parentsUntil('form').find('input').val() !== currentPageTitle
@@ -192,7 +192,7 @@ define(['jquery', './bundle', 'TYPO3/CMS/Backend/AjaxDataHandler', 'TYPO3/CMS/Ba
         $('div#snippet_title.snippet_container.snippet-editor__container').off('click');
 
         previewRequest.fail(function (jqXHR) {
-            Notification.error('Loading the page content preview failed', [jqXHR.status, jqXHR.statusText].join(' '), 0);
+            console.log('Loading the page content preview failed', [jqXHR.status, jqXHR.statusText].join(' '));
         });
     });
 });

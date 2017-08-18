@@ -1,4 +1,7 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:yoast="http://typo3.org/ns/YoastSeoForTypo3/YoastSeo/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="Default" />
+
+<f:section name="Content">
 <h1>Yoast SEO</h1>
 <f:if condition="{page}">
 	<f:then>
@@ -141,9 +144,8 @@
 		</div>
 	</f:then>
 	<f:else>
-		<f:be.infobox title="{f:translate(key: 'LLL:EXT:yoast_seo/Resources/Private/Language/BackendModule.xlf:noPageSelected.title')}" state="-1">
-			{f:translate(key: 'LLL:EXT:yoast_seo/Resources/Private/Language/BackendModule.xlf:noPageSelected.description')}
-		</f:be.infobox>
+		<p>No page selected.</p>
 	</f:else>
 </f:if>
+</f:section>
 </html>

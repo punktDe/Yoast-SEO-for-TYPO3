@@ -200,5 +200,15 @@ define(['jquery', './bundle'], function ($, YoastSEO) {
             $targetElement.find('.spinner').hide();
             $targetElement.html('<div class="callout callout-warning">' + text + '</div>');
         });
+
+        var $allTabs = $('.yoast-module-tab');
+        var $allTabContents = $('.tab-pane');
+
+        $allTabs.click(function () {
+            $allTabs.removeClass("active");
+            $allTabContents.removeClass("active");
+            this.classList.add("active");
+            $('#'+this.id.substring(1)).addClass("active");
+        });
     });
 });

@@ -91,9 +91,7 @@ class ModuleController extends ActionController
 //            return;
 //        }
 
-//        $this->createMenu();
         $this->makeLanguageMenu();
-//        $this->registerDocheaderButtons();
     }
 
     protected function initializeAction()

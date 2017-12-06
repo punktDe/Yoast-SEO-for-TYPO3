@@ -1,6 +1,6 @@
 {namespace yoast=YoastSeoForTypo3\YoastSeo\ViewHelpers}
 <yoast:removeEnters>
-        <title><f:spaceless>
+        <title><yoast:spaceless>
             <f:if condition="{settings.titlePrepend}">
                 <f:then>{settings.titlePrepend} </f:then>
             </f:if>
@@ -11,5 +11,5 @@
             <f:if condition="{settings.titleAppend}">
                 <f:then> {settings.titleAppend}</f:then>
             </f:if>
-        </f:spaceless></title>
+        </yoast:spaceless></title>
 </yoast:removeEnters>

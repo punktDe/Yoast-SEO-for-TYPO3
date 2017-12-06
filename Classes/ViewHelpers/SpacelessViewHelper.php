@@ -1,14 +1,11 @@
 <?php
 namespace YoastSeoForTypo3\YoastSeo\ViewHelpers;
-
 /*
  * This file belongs to the package "YOAST".
  * And was backported from the package "TYPO3 Fluid".
  * See LICENSE.txt that was shipped with this package.
  */
-
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
-
 /**
  * Space Removal ViewHelper
  *
@@ -36,12 +33,10 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
  */
 class SpacelessViewHelper extends AbstractViewHelper
 {
-
     /**
      * @var boolean
      */
     protected $escapeOutput = false;
-
     /**
      * @param null $content
      * @return mixed|string

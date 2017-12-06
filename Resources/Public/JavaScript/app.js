@@ -1,7 +1,7 @@
 /*global define, top, tx_yoast_seo, TYPO3*/
 
 define(['jquery', './bundle'], function ($, YoastSEO) {
-   'use strict';
+    'use strict';
 
     var previewRequest = $.get(tx_yoast_seo.settings.preview);
 
@@ -62,7 +62,7 @@ define(['jquery', './bundle'], function ($, YoastSEO) {
 
             // the preview is an XML document, for easy traversal convert it to a jQuery object
             var $previewDocument = $(previewDocument);
-            var $metaSection = $previewDocument.find('meta');
+            var $metaSection = $previewDocument;
             var $contentElements = $previewDocument.find('content>element');
 
             var pageContent = '';
@@ -76,7 +76,7 @@ define(['jquery', './bundle'], function ($, YoastSEO) {
                 data: {
                     title: $metaSection.find('title').text(),
                     metaDesc: $metaSection.find('description').text(),
-                    urlPath: $metaSection.find('pathOverride').text(),
+                    urlPath: $metaSection.find('pathOverride').text()
                 },
                 baseURL: $metaSection.find('url').text().replace($metaSection.find('slug').text(), '/'),
                 placeholder: {

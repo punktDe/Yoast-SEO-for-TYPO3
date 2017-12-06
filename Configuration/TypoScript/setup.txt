@@ -106,12 +106,12 @@ yoast_seo_preview {
             30.stdWrap.noTrimWrap = | ||
 
             stdWrap.trim = 1
-            stdWrap.wrap = <title><![CDATA[|]]></title>
+            stdWrap.wrap = <title>|</title>
         }
 
         30 = TEXT
         30.field = {$plugin.tx_yoastseo.descriptionField}
-        30.wrap = <description><![CDATA[|]]></description>
+        30.wrap = <description>|</description>
 
         40 = TEXT
         40.data = TSFE:config|config|locale_all

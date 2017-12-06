@@ -3,6 +3,7 @@
 
 <f:section name="Content">
 <h1>Yoast SEO</h1>
+
 <f:if condition="{page}">
 	<f:then>
 		<f:flashMessages/>
@@ -13,7 +14,7 @@
 					<f:if condition="{viewSettings.showAnalysisTab}">
 						<f:then>
 							<li role="presentation" class="t3js-tabmenu-item  active yoast-module-tab" id="_tab-analysis">
-								<a href="#tab-analysis" title="" >
+								<a href="#" title="" >
 									<i class="fa fa-eye"></i> <f:translate key="LLL:EXT:yoast_seo/Resources/Private/Language/BackendModule.xlf:analysis" />
 								</a>
 							</li>
@@ -22,7 +23,7 @@
 					<f:if condition="{viewSettings.showSocialTab}">
 						<f:then>
 							<li role="presentation" class="t3js-tabmenu-item yoast-module-tab" id="_tab-2">
-								<a href="#tab-2" title="" >
+								<a href="#" title="" >
 									<i class="fa fa-share-alt"></i> <f:translate key="LLL:EXT:yoast_seo/Resources/Private/Language/BackendModule.xlf:social" />
 								</a>
 							</li>
@@ -31,7 +32,7 @@
 					<f:if condition="{viewSettings.showAdvancedTab}">
 						<f:then>
 							<li role="presentation" class="t3js-tabmenu-item yoast-module-tab" id="_tab-3">
-								<a href="#tab-3" title="" >
+								<a href="#" title="" >
 									<i class="fa fa-cog"></i> <f:translate key="LLL:EXT:yoast_seo/Resources/Private/Language/BackendModule.xlf:advanced" />
 								</a>
 							</li>

@@ -24,21 +24,6 @@ class ModuleController extends ActionController
 {
 
     /**
-     * Backend Template Container.
-     * Takes care of outer "docheader" and other stuff this module is embedded in.
-     *
-     * @var string
-     */
-//    protected $defaultViewObjectName = BackendTemplateView::class;
-
-    /**
-     * BackendTemplateContainer
-     *
-     * @var BackendTemplateView
-     */
-//    protected $view;
-
-    /**
      * @var PageRenderer
      */
     protected $pageRenderer;
@@ -124,8 +109,12 @@ class ModuleController extends ActionController
      */
     public function settingsAction()
     {
+        $languageId = 0;
+        if ($this->request->hasArgument('language')) {
+            $languageId = $this->request->getArgument('language');
+        }
+        $this->view->assign('languageId', $languageId);
     }
-
     /**
      * @return void
      */
@@ -186,7 +175,7 @@ class ModuleController extends ActionController
         }
 
         $previewDataUrl = vsprintf(
-            $domain . $this->configuration['previewUrlTemplate'],
+            $domain . '/index.php?id=%d&type=%d&L=%d',
             array(
                 (int)$pageId,
                 static::FE_PREVIEW_TYPE,
@@ -547,76 +536,6 @@ class ModuleController extends ActionController
     }
 
     /**
-     * Registers the Icons into the docheader
-     *
-     * @return void
-     * @throws \InvalidArgumentException
-     */
-    protected function registerDocheaderButtons()
-    {
-        /** @var ButtonBar $buttonBar */
-        $buttonBar = $this->view->getModuleTemplate()->getDocHeaderComponent()->getButtonBar();
-        $currentRequest = $this->request;
-        $moduleName = $currentRequest->getPluginName();
-        $lang = $this->getLanguageService();
-
-        $extensionName = $currentRequest->getControllerExtensionName();
-        $modulePrefix = strtolower('tx_' . $extensionName . '_' . $moduleName);
-        $shortcutName = $this->getLanguageService()->sL('LLL:EXT:beuser/Resources/Private/Language/locallang.xml:backendUsers');
-        if ($currentRequest->getControllerName() === 'Module') {
-            if ($currentRequest->getControllerActionName() === 'edit') {
-                if ($currentRequest->hasArgument('returnUrl') &&
-                    $currentRequest->getArgument('returnUrl')) {
-                    // CLOSE button:
-                    $closeButton = $buttonBar->makeLinkButton()
-                        ->setHref(urldecode($currentRequest->getArgument('returnUrl')))
-                        ->setClasses('t3js-editform-close')
-                        ->setTitle($lang->sL('LLL:EXT:lang/locallang_core.xlf:rm.closeDoc'))
-                        ->setIcon($this->view->getModuleTemplate()->getIconFactory()->getIcon(
-                            'actions-document-close',
-                            Icon::SIZE_SMALL
-                        ));
-                    $buttonBar->addButton($closeButton, ButtonBar::BUTTON_POSITION_LEFT, 1);
-                }
-
-                // SAVE button:
-                $saveButton = $buttonBar->makeInputButton()
-                    ->setTitle($lang->sL('LLL:EXT:lang/locallang_core.xlf:rm.saveDoc'))
-                    ->setName($modulePrefix . '[submit]')
-                    ->setValue('Save')
-                    ->setForm('editYoastSettings')
-                    ->setIcon($this->view->getModuleTemplate()->getIconFactory()->getIcon(
-                        'actions-document-save',
-                        Icon::SIZE_SMALL
-                    ))
-                    ->setShowLabelText(true);
-
-                $buttonBar->addButton($saveButton, ButtonBar::BUTTON_POSITION_LEFT, 2);
-            }
-            if ($currentRequest->getControllerActionName() === 'settings') {
-                // SAVE button:
-                $saveButton = $buttonBar->makeInputButton()
-                    ->setTitle($lang->sL('LLL:EXT:lang/locallang_core.xlf:rm.saveDoc'))
-                    ->setName($modulePrefix . '[submit]')
-                    ->setValue('Save')
-                    ->setForm('editYoastSettings')
-                    ->setIcon($this->view->getModuleTemplate()->getIconFactory()->getIcon(
-                        'actions-document-save',
-                        Icon::SIZE_SMALL
-                    ))
-                    ->setShowLabelText(true);
-
-                $buttonBar->addButton($saveButton, ButtonBar::BUTTON_POSITION_LEFT, 2);
-            }
-        }
-        $shortcutButton = $buttonBar->makeShortcutButton()
-            ->setModuleName($moduleName)
-            ->setDisplayName($shortcutName)
-            ->setGetVariables(array('id' => (int)GeneralUtility::_GP('id')));
-        $buttonBar->addButton($shortcutButton);
-    }
-
-    /**
      * Make the LanguageMenu
      *
      * @return void
@@ -640,30 +559,6 @@ class ModuleController extends ActionController
             }
             $this->moduleTemplate->getDocHeaderComponent()->getMenuRegistry()->addMenu($languageMenu);
         }
-    }
-
-    /**
-     * Create menu
-     *
-     */
-    protected function createMenu()
-    {
-        $lang = $this->getLanguageService();
-        $uriBuilder = $this->objectManager->get(UriBuilder::class);
-        $uriBuilder->setRequest($this->request);
-        $menu = $this->view->getModuleTemplate()->getDocHeaderComponent()->getMenuRegistry()->makeMenu();
-        $menu->setIdentifier('yoast-seo');
-        $actions = $this->configuration['menuActions'];
-
-        foreach ($actions as $action) {
-            $item = $menu->makeMenuItem()
-                ->setTitle($lang->sL('LLL:EXT:yoast_seo/Resources/Private/Language/BackendModule.xlf:action.' . $action['label']))
-                ->setHref($uriBuilder->reset()->uriFor($action['action'], [], 'Module'))
-                ->setActive($this->request->getControllerActionName() === $action['action']);
-
-            $menu->addMenuItem($item);
-        }
-        $this->view->getModuleTemplate()->getDocHeaderComponent()->getMenuRegistry()->addMenu($menu);
     }
 
     /**

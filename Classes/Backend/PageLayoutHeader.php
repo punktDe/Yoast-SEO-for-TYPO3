@@ -198,7 +198,7 @@ class PageLayoutHeader
             $this->pageRenderer->addRequireJsConfiguration(
                 array(
                     'paths' => array(
-                        'YoastSEO' => $publicResourcesPath . 'JavaScript/'
+                        'YoastSEO' => $publicResourcesPath . 'JavaScript'
                     )
                 )
             );

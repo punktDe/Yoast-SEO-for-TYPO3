@@ -227,7 +227,7 @@ class ModuleController extends ActionController
         $this->pageRenderer->addRequireJsConfiguration(
             array(
                 'paths' => array(
-                    'YoastSEO' => $publicResourcesPath . 'JavaScript/'
+                    'YoastSEO' => $publicResourcesPath . 'JavaScript'
                 )
             )
         );

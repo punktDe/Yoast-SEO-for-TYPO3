@@ -206,7 +206,9 @@ class PageLayoutHeader
             $this->pageRenderer->loadRequireJsModule('YoastSEO/app');
 
             $this->pageRenderer->addCssFile(
-                $publicResourcesPath . 'CSS/yoast-seo.min.css'
+                $publicResourcesPath . 'CSS/yoast-seo.min.css',
+                // no concatenating or compressing of backend css
+                'stylesheet', 'all', '', false, false, '', true
             );
 
             $returnUrl = CMS\Backend\Utility\BackendUtility::getModuleUrl('web_layout', array('id' => (int)$pageLayoutController->id));

@@ -235,18 +235,26 @@ class ModuleController extends ActionController
         $this->pageRenderer->loadRequireJsModule('YoastSEO/app');
 
         $this->pageRenderer->addCssFile(
-            $publicResourcesPath . 'CSS/bootstrap.min.css'
+            $publicResourcesPath . 'CSS/bootstrap.min.css',
+            // no concatenating or compressing of backend css
+            'stylesheet', 'all', '', false, false, '', true
         );
 
         $this->pageRenderer->addCssFile(
-            $publicResourcesPath . 'CSS/bootstrap-theme.min.css'
+            $publicResourcesPath . 'CSS/bootstrap-theme.min.css',
+            // no concatenating or compressing of backend css
+            'stylesheet', 'all', '', false, false, '', true
         );
 
         $this->pageRenderer->addCssFile(
-            $publicResourcesPath . 'CSS/yoast-seo.min.css'
+            $publicResourcesPath . 'CSS/yoast-seo.min.css',
+            // no concatenating or compressing of backend css
+            'stylesheet', 'all', '', false, false, '', true
         );
 
-        $this->pageRenderer->addJsLibrary('bootstrap', $publicResourcesPath . 'JavaScript/bootstrap.min.js');
+        $this->pageRenderer->addJsLibrary('bootstrap', $publicResourcesPath . 'JavaScript/bootstrap.min.js',
+            // no concatenating or compressing of backend css
+            'stylesheet', 'all', '', false, false, '', true);
 
         $returnUrl = '';
         if ($this->request->hasArgument('returnUrl')) {

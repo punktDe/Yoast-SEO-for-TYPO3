@@ -101,10 +101,11 @@ class PageLayoutHeader
             && (int)$pageLayoutController->id > 0
             && (int)$pageLayoutController->current_sys_language > 0
         ) {
-            $overlayRecords = CMS\Backend\Utility\BackendUtility::getRecordLocalization(
-                'pages',
+            $overlayRecords = CMS\Backend\Utility\BackendUtility::getRecordsByField(
+                'pages_language_overlay',
+                'pid',
                 (int)$pageLayoutController->id,
-                (int)$pageLayoutController->current_sys_language
+                'AND sys_language_uid=' . (int)$pageLayoutController->current_sys_language
             );
 
             if (is_array($overlayRecords) && array_key_exists(0, $overlayRecords) && is_array($overlayRecords[0])) {

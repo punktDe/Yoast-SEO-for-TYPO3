@@ -199,15 +199,16 @@ class PageLayoutHeader
             $this->pageRenderer->addRequireJsConfiguration(
                 array(
                     'paths' => array(
-                        'YoastSEO' => $publicResourcesPath . 'JavaScript'
+                        'YoastSEO' => '/' . $publicResourcesPath . 'JavaScript'
                     )
                 )
             );
 
+            $this->pageRenderer->loadJquery();
             $this->pageRenderer->loadRequireJsModule('YoastSEO/app');
 
             $this->pageRenderer->addCssFile(
-                $publicResourcesPath . 'CSS/yoast-seo.min.css',
+                '../../../../' . $publicResourcesPath . 'CSS/yoast-seo.min.css',
                 // no concatenating or compressing of backend css
                 'stylesheet', 'all', '', false, false, '', true
             );

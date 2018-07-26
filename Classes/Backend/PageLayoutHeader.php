@@ -223,16 +223,12 @@ class PageLayoutHeader
             $seoUrl = CMS\Backend\Utility\BackendUtility::getModuleUrl('web_YoastSeoSeoPlugin', $parameters);
 
             return '<div class="t3-page-column-header">
-                    <div class="t3-page-column-header-icons btn-group btn-group-sm">
+                    <div class="t3-page-column-header-label">
+                        Yoast SEO
                         <a href="' . $seoUrl . '" title="" class="btn btn-default">
-                            <span class="t3js-icon icon icon-size-small icon-state-default icon-actions-document-open" data-identifier="actions-document-open">
-                                <span class="icon-markup">
-                                    <img src="/typo3/sysext/core/Resources/Public/Icons/T3Icons/actions/actions-document-open.svg" width="16" height="16">
-                                </span>
-                            </span>
+                            <span class="t3-icon t3-icon-actions t3-icon-actions-page t3-icon-page-open" data-identifier="actions-document-open">&nbsp;</span>
                         </a>
                     </div>
-                    <div class="t3-page-column-header-label">Yoast SEO</div>
                 </div>
                 <input id="focusKeyword" style="display: none" />
                 <div id="' . $targetElementId . '" class="t3-grid-cell yoastSeo yoastSeo--small">
